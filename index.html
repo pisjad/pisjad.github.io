@@ -1,211 +1,387 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="id" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./output.css" />
+        <title>Pisjad's Hideout</title>
+
+        <!-- Panggil Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css?family=Montserrat"
+            href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
             rel="stylesheet"
         />
-        <link rel="shortcut icon" href="./img/icon.ico" type="image/x-icon" />
-        <title>Pisjad's Portfolio</title>
+
+        <!-- Panggil file CSS eksternal -->
+        <link rel="stylesheet" href="style.css" />
     </head>
-    <body class="font-teks">
-        <!-- logo and navigation bar -->
-        <nav class="bg-stone-900 flex items-center px-12 py-6 justify-between">
-            <span class="text-white text-3xl font-bold">pisjad.</span>
-            <li class="text-pink-600 list-none font-semibold">
-                <a href="#about" class="hover:text-gray-100 pr-8 text-lg"
-                    >About</a
-                >
-                <a href="#skill" class="hover:text-gray-100 pr-8 text-lg"
-                    >Skills</a
-                >
-                <a href="#experience" class="hover:text-gray-100 pr-8 text-lg"
-                    >Experience</a
-                >
-                <a href="#contact" class="hover:text-gray-100 pr-8 text-lg"
-                    >Contact</a
-                >
-            </li>
-        </nav>
+    <body class="antialiased">
+        <!-- Custom Cursor Elements -->
+        <div class="cursor"></div>
+        <div class="cursor-trail"></div>
 
-        <!-- about me! -->
+        <main class="relative z-10">
+            <!-- 1. Hero Section -->
+            <section
+                id="hero"
+                class="h-screen w-full flex flex-col items-center justify-center text-center relative overflow-hidden p-4"
+            >
+                <canvas
+                    id="pixel-rain"
+                    class="absolute top-0 left-0 w-full h-full z-0"
+                ></canvas>
+                <div
+                    class="z-10 relative flex flex-col items-center justify-center"
+                >
+                    <div id="intro-box" class="intro-box">
+                        <p>Hi, I'm</p>
+                    </div>
+                    <h1 class="main-name" data-interactive data-value="PISJAD">
+                        PISJAD
+                    </h1>
+                    <div class="hero-subtitles">
+                        <p>digital artisan</p>
+                        <p class="mt-2">
+                            love to craft something magical; design, code, game
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Skills Section -->
+            <section
+                id="skills"
+                class="container mx-auto px-6 py-20 md:py-32 text-center"
+            >
+                <div>
+                    <h2 class="section-title">Book of Arts</h2>
+                    <div class="mt-12 flex flex-wrap justify-center gap-8">
+                        <div class="skill-item text-center bg-white text-black hover:bg-[#B1CECC]">
+                            Product Design
+                        </div>
+                        <div class="skill-item text-center bg-white text-black hover:bg-[#B1CECC]">
+                            Graphic Design
+                        </div>
+                        <div class="skill-item text-center bg-white text-black hover:bg-[#B1CECC]">
+                            Frontend Development
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Works Section -->
+            <section
+                id="jejak-karsa"
+                class="container mx-auto px-6 py-20 md:py-32"
+            >
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Archived Canvases</h2>
+                    <p class="mt-4 text-gray-400">
+                        A gallery of forged creations.
+                    </p>
+                </div>
+                <div
+                    class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                    <!-- Project Card 1 -->
+                    <div
+                        class="project-card"
+                        data-interactive
+                        data-title="Project Title One"
+                        data-category="UI/UX Design, Web Development"
+                        data-image="https://placehold.co/800x600/0A0A0A/EAEAEA?text=Project+One"
+                        data-gif="https://placehold.co/800x600/0A0A0A/B1CECC?text=Animated+GIF"
+                        data-narrative="Ini adalah narasi singkat tentang Project One. Menjelaskan masalah yang dihadapi, bagaimana pendekatan desain dan teknologi digunakan untuk menyelesaikannya, dan apa dampak akhir yang dihasilkan. Cerita harus ringkas namun kuat."
+                    >
+                        <div
+                            class="border-2 border-gray-700 p-2 group transition-all duration-300 hover:border-secondary hover:neon-secondary-border"
+                        >
+                            <div class="overflow-hidden">
+                                <img
+                                    src="https://placehold.co/800x600/0A0A0A/EAEAEA?text=Project+One"
+                                    alt="Project One"
+                                    class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 project-image"
+                                />
+                            </div>
+                            <h3 class="text-2xl font-bold mt-4">
+                                Project Title One
+                            </h3>
+                            <p class="text-sm text-gray-400 mt-1">
+                                UI/UX Design
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div
+                        class="project-card"
+                        data-interactive
+                        data-title="Project Title Two"
+                        data-category="Game Development"
+                        data-image="https://placehold.co/800x600/0A0A0A/EAEAEA?text=Project+Two"
+                        data-gif="https://placehold.co/800x600/0A0A0A/B1CECC?text=Animated+GIF"
+                        data-narrative="Ini adalah narasi singkat tentang Project Two. Fokus pada konsep game, tantangan teknis, dan apa yang membuat game ini unik. Bisa juga menyertakan link ke build atau video gameplay."
+                    >
+                        <div
+                            class="border-2 border-gray-700 p-2 group transition-all duration-300 hover:border-secondary hover:neon-secondary-border"
+                        >
+                            <div class="overflow-hidden">
+                                <img
+                                    src="https://placehold.co/800x600/0A0A0A/EAEAEA?text=Project+Two"
+                                    alt="Project Two"
+                                    class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 project-image"
+                                />
+                            </div>
+                            <h3 class="text-2xl font-bold mt-4">
+                                Project Title Two
+                            </h3>
+                            <p class="text-sm text-gray-400 mt-1">
+                                Game Development
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div
+                        class="project-card"
+                        data-interactive
+                        data-title="Project Title Three"
+                        data-category="Branding, Graphic Design"
+                        data-image="https://placehold.co/800x600/0A0A0A/EAEAEA?text=Project+Three"
+                        data-gif="https://placehold.co/800x600/0A0A0A/B1CECC?text=Animated+GIF"
+                        data-narrative="Ini adalah narasi singkat tentang Project Three. Menceritakan tentang proses kreatif di balik sebuah identitas visual, dari konsep hingga eksekusi final."
+                    >
+                        <div
+                            class="border-2 border-gray-700 p-2 group transition-all duration-300 hover:border-secondary hover:neon-secondary-border"
+                        >
+                            <div class="overflow-hidden">
+                                <img
+                                    src="https://placehold.co/800x600/0A0A0A/EAEAEA?text=Project+Three"
+                                    alt="Project Three"
+                                    class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 project-image"
+                                />
+                            </div>
+                            <h3 class="text-2xl font-bold mt-4">
+                                Project Title Three
+                            </h3>
+                            <p class="text-sm text-gray-400 mt-1">Branding</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Hubungi Section -->
+            <footer id="hubungi" class="text-center py-20 md:py-32">
+                <div>
+                    <p class="section-title">Get in touch</p>
+                    <div class="flex justify-center space-x-6 mt-12">
+                        <a
+                            href="mailto:email@example.com"
+                            data-interactive
+                            class="social-icon"
+                            title="Email"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                                ></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                        <a
+                            href="#"
+                            data-interactive
+                            class="social-icon"
+                            title="WhatsApp"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01s-.521.074-.792.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"
+                                />
+                            </svg>
+                        </a>
+                        <a
+                            href="#"
+                            data-interactive
+                            class="social-icon"
+                            title="Instagram"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <rect
+                                    x="2"
+                                    y="2"
+                                    width="20"
+                                    height="20"
+                                    rx="5"
+                                    ry="5"
+                                ></rect>
+                                <path
+                                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                                ></path>
+                                <line
+                                    x1="17.5"
+                                    y1="6.5"
+                                    x2="17.51"
+                                    y2="6.5"
+                                ></line>
+                            </svg>
+                        </a>
+                        <a
+                            href="#"
+                            data-interactive
+                            class="social-icon"
+                            title="LinkedIn"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                />
+                            </svg>
+                        </a>
+                        <a
+                            href="#"
+                            data-interactive
+                            class="social-icon"
+                            title="X (Twitter)"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                                />
+                            </svg>
+                        </a>
+                        <a
+                            href="#"
+                            data-interactive
+                            class="social-icon"
+                            title="GitHub"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Project Modal -->
         <div
-            id="about"
-            class="bg-slate-50 content flex px-80 pb-20 pt-20 justify-between"
+            id="project-modal"
+            class="modal fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6 opacity-0 invisible"
         >
-            <div class="left py-20 w-1/3 pr-0">
-                <h1 class="text-5xl text-pink-600 mb-4 font-bold">Hi, I'm</h1>
-                <h2
-                    class="text-6xl text-white bg-pink-600 py-4 rounded-lg px-4"
+            <div
+                class="modal-content w-full max-w-4xl bg-gray-900 border-2 border-gray-700 p-8 relative transform scale-95"
+            >
+                <button
+                    id="close-modal"
+                    data-interactive
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
                 >
-                    Sajjad
-                </h2>
-                <h3 class="text-gray-900 mt-4 text-xl">
-                    Love to design, learn something new, and create something
-                    magical
-                </h3>
-            </div>
-            <div class="right px-30 py-10">
-                <img
-                    class="rounded-full w-80 shadow-2xl"
-                    src="./img/pisjadphoto.jpg"
-                />
-            </div>
-        </div>
-
-        <!-- skill -->
-        <div id="skill" class="skill bg-stone-900">
-            <div class="text-pink-600 text-4xl text-center font-semibold p-20">
-                <h1>Capabilities</h1>
-            </div>
-            <div class="content flex flex-row px-44 pb-20 justify-evenly">
-                <div class="card w-72">
-                    <h1 class="text-3xl text-pink-600 font-bold">01.</h1>
-                    <h2 class="text-3xl pt-10 pb-5 text-white">
-                        Graphic Design
-                    </h2>
-                    <p class="text-white">
-                        Always passionate about art and design since childhood.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Veniam quia ut nemo ipsum nulla enim, possimus voluptas
-                        doloremque iure veritatis porro reiciendis autem eaque
-                        praesentium ad nisi velit harum aspernatur?
-                    </p>
-                </div>
-                <div class="card w-72">
-                    <h1 class="text-3xl text-pink-600 font-bold">02.</h1>
-                    <h2 class="text-3xl pt-10 pb-5 text-white">UI/UX Design</h2>
-                    <p class="text-white">
-                        Always passionate about art and design since childhood.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Veniam quia ut nemo ipsum nulla enim, possimus voluptas
-                        doloremque iure veritatis porro reiciendis autem eaque
-                        praesentium ad nisi velit harum aspernatur?
-                    </p>
-                </div>
-                <div class="card w-72">
-                    <h1 class="text-3xl text-pink-600 font-bold">03.</h1>
-                    <h2 class="text-3xl pt-10 pb-5 text-white">Java Basic</h2>
-                    <p class="text-white">
-                        Always passionate about art and design since childhood.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Veniam quia ut nemo ipsum nulla enim, possimus voluptas
-                        doloremque iure veritatis porro reiciendis autem eaque
-                        praesentium ad nisi velit harum aspernatur?
-                    </p>
+                    <svg
+                        class="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        ></path>
+                    </svg>
+                </button>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <img
+                            id="modal-image"
+                            src=""
+                            alt="Project Image"
+                            class="w-full h-auto object-cover mb-4"
+                        />
+                        <div class="flex space-x-4">
+                            <a
+                                href="#"
+                                data-interactive
+                                class="flex-1 text-center px-4 py-2 border-2 border-secondary text-secondary hover:bg-secondary hover:text-black transition-all duration-300"
+                                >Live Demo</a
+                            >
+                            <a
+                                href="#"
+                                data-interactive
+                                class="flex-1 text-center px-4 py-2 border-2 border-gray-600 text-gray-400 hover:bg-gray-600 hover:text-white transition-all duration-300"
+                                >Source Code</a
+                            >
+                        </div>
+                    </div>
+                    <div>
+                        <h3 id="modal-title" class="text-4xl font-bold"></h3>
+                        <p
+                            id="modal-category"
+                            class="text-sm text-gray-400 mt-2 mb-6"
+                        ></p>
+                        <p
+                            id="modal-narrative"
+                            class="text-base leading-relaxed"
+                        ></p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- experience -->
-        <div id="experience" class="bg-gray-100"></div>
-        <div class="text-pink-600 text-4xl text-center font-semibold p-20">
-            <h1>Experience</h1>
+        <div id="pisjad-photo-modal" class="absolute z-20">
+            <img src="img/pisjadphoto.jpg" alt="Pisjad Photo" class="w-64 h-auto">
         </div>
-        <div class="content flex flex-row px-34 pb-28 justify-evenly">
-            <div class="card px-2 flex flex-wrap">
-                <div class="rounded-md bg-pink-600 p-4 w-72 text-white">
-                    <p>
-                        2019 - 2020 <br />
-                        Member of Language Division of Student Council Albinaa
-                        Islamic Boarding School
-                    </p>
-                </div>
-            </div>
-            <div class="card px-2 flex flex-wrap">
-                <div class="rounded-md bg-pink-600 p-4 w-72 text-white">
-                    <p>
-                        2018 - 2020 <br />
-                        Secretary of Albinaa Funun Islamy
-                    </p>
-                </div>
-            </div>
-            <div class="card px-2 flex flex-wrap">
-                <div class="rounded-md bg-pink-600 p-4 w-72 text-white">
-                    <p>
-                        2019 - 2021 <br />
-                        Graphic Designer of SANTRI! Magazine
-                    </p>
-                </div>
-            </div>
-            <div class="card px-2 flex flex-wrap">
-                <div class="rounded-md bg-pink-600 p-4 w-72 text-white">
-                    <p>
-                        2019 - 2020 <br />
-                        Graphic Designer of AWAN Wall Magazine
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div id="contact" class="bg-stone-900 pb-20">
-            <div class="text-pink-600 text-4xl text-center font-semibold p-20">
-                <h1>Get in touch</h1>
-            </div>
-            <div class="flex flex-row items-center justify-center pb-10">
-                <a
-                    href="https://www.instagram.com/hafizh.sajjad/"
-                    target="_blank"
-                    class="w-12 h-12 mx-6 rounded-full flex justify-center item-center hover:bg-white bg-pink-600"
-                >
-                    <svg
-                        role="img"
-                        width="20"
-                        class="fill-current"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <title>Instagram</title>
-                        <path
-                            d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
-                        />
-                    </svg>
-                </a>
-                <a
-                    href="https://github.com/pisjad"
-                    target="_blank"
-                    class="w-12 h-12 mx-6 rounded-full flex justify-center item-center hover:bg-white bg-pink-600"
-                >
-                    <svg
-                        role="img"
-                        width="20"
-                        class="fill-current"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <title>GitHub</title>
-                        <path
-                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                        />
-                    </svg>
-                </a>
-                <!--ICON WA-->
-                <a
-                    href="https://wa.me/6282121619065"
-                    target="_blank"
-                    class="w-12 h-12 mx-6 rounded-full flex justify-center item-center hover:bg-white bg-pink-600"
-                >
-                    <svg
-                        role="img"
-                        width="20"
-                        class="fill-current"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <title>WhatsApp</title>
-                        <path
-                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
-                        />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="bg-pink-600 flex justify-center pb-12 pt-10 font-semibold">
-            <h1>© Copyright pisjad 2022.</h1>
-        </div>
+        <!-- Panggil Library & file JS eksternal -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        <script src="script.js" defer></script>
     </body>
 </html>

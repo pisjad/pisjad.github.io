@@ -3,7 +3,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                teks: ["Montserrat"],
+                teks: ["VT323"],
             },
         },
     },
