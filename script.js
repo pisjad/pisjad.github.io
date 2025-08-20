@@ -42,15 +42,15 @@ if (canvas) {
     canvas.height = window.innerHeight;
 
     let particles = [];
-    const particleCount = Math.floor(canvas.width / 20);
+    const particleCount = Math.floor(canvas.width / 20); // More particles
 
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
             this.speed = 0.8 + Math.random() * 1.5;
-            this.size = 1.5 + Math.random() * 2;
-            this.color = 'rgba(177, 206, 204, 0.6)';
+            this.size = 1.5 + Math.random() * 2; // Slightly bigger
+            this.color = 'rgba(177, 206, 204, 0.6)'; // More opaque
         }
         update() {
             this.y += this.speed;
@@ -95,53 +95,27 @@ if (canvas) {
 // --- 3. GSAP ANIMATIONS ---
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.set("#pisjad-photo-modal", { autoAlpha: 0, scale: 0.8 });
-
+// Hero text animation
 gsap.from(".main-name", { duration: 1.5, scale: 0.9, opacity: 0, ease: "power3.out", delay: 0.5 });
 gsap.from(".hero-subtitles", { duration: 1.5, y: 30, opacity: 0, ease: "power3.out", delay: 0.8 });
 gsap.from("#intro-box", { duration: 1, y: -30, x: -30, rotation: -15, opacity: 0, ease: "power3.out", delay: 0.3 });
 
-const titles = document.querySelectorAll('.section-title');
-titles.forEach(title => {
-    gsap.from(title, {
+
+// General section fade-in animation
+const sections = document.querySelectorAll('.anim-section');
+sections.forEach(section => {
+    gsap.from(section, {
         scrollTrigger: {
-            trigger: title,
+            trigger: section,
             start: "top 85%",
             toggleActions: "play none none none"
         },
-        y: 50,
         opacity: 0,
+        y: 50,
         duration: 1,
         ease: "power3.out"
     });
 });
-
-gsap.from(".skill-item", {
-    scrollTrigger: {
-        trigger: "#skills",
-        start: "top 80%",
-        toggleActions: "play none none none"
-    },
-    opacity: 0,
-    y: 30,
-    stagger: 0.2,
-    duration: 0.8,
-    ease: "power3.out"
-});
-
-gsap.from(".project-card", {
-    scrollTrigger: {
-        trigger: "#jejak-karsa",
-        start: "top 80%",
-        toggleActions: "play none none none"
-    },
-    opacity: 0,
-    y: 30,
-    stagger: 0.2,
-    duration: 0.8,
-    ease: "power3.out"
-});
-
 
 // --- 4. PISJAD HOVER ANIMATION ---
 const nameElement = document.querySelector('.main-name');
@@ -149,11 +123,12 @@ const introBox = document.getElementById('intro-box');
 if (nameElement && introBox) {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let interval = null;
-    const pisjadModal = document.getElementById('pisjad-photo-modal');
 
-    nameElement.onmouseenter = event => {  
+    nameElement.addEventListener('mouseenter', event => {  
         let iteration = 0;
+        
         clearInterval(interval);
+        
         interval = setInterval(() => {
             event.target.innerText = event.target.innerText
             .split("")
@@ -173,32 +148,11 @@ if (nameElement && introBox) {
         }, 30);
 
         introBox.style.transform = 'rotate(-15deg) translate(-60px, -30px)';
+    });
 
-        if (pisjadModal) {
-            const rect = event.target.getBoundingClientRect();
-            gsap.to(pisjadModal, {
-                top: `${rect.top}px`,
-                left: `${rect.right + 20}px`,
-                autoAlpha: 1,
-                scale: 1,
-                duration: 0.3,
-                ease: 'power3.out'
-            });
-        }
-    }
-
-    nameElement.onmouseleave = () => {
+    nameElement.addEventListener('mouseleave', () => {
         introBox.style.transform = 'rotate(-8deg) translate(0, 0)';
-
-        if (pisjadModal) {
-            gsap.to(pisjadModal, {
-                autoAlpha: 0,
-                scale: 0.8,
-                duration: 0.2,
-                ease: 'power3.in'
-            });
-        }
-    }
+    });
 }
 
 
@@ -208,17 +162,6 @@ const modal = document.getElementById('project-modal');
 const closeModalBtn = document.getElementById('close-modal');
 
 projectCards.forEach(card => {
-    const img = card.querySelector('.project-image');
-    const staticSrc = card.dataset.image;
-    const gifSrc = card.dataset.gif;
-
-    card.addEventListener('mouseenter', () => {
-        if (gifSrc) img.src = gifSrc;
-    });
-    card.addEventListener('mouseleave', () => {
-        if (staticSrc) img.src = staticSrc;
-    });
-
     card.addEventListener('click', () => {
         document.getElementById('modal-title').textContent = card.dataset.title;
         document.getElementById('modal-category').textContent = card.dataset.category;
@@ -232,13 +175,12 @@ projectCards.forEach(card => {
 });
 
 function closeModal() {
-    gsap.to(modal, { 
-        autoAlpha: 0, 
-        duration: 0.3,
-        onComplete: () => {
-            document.body.style.overflow = '';
-        }
-    });
+    modal.classList.add('opacity-0');
+    modal.querySelector('.modal-content').classList.add('scale-95');
+    setTimeout(() => {
+        modal.classList.add('invisible');
+        document.body.style.overflow = '';
+    }, 300);
 }
 
 closeModalBtn.addEventListener('click', closeModal);
@@ -249,18 +191,7 @@ modal.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape" && gsap.getProperty(modal, "autoAlpha") > 0) {
+    if (e.key === "Escape" && !modal.classList.contains('invisible')) {
         closeModal();
     }
-});
-
-// --- 6. SOCIAL ICON HOVER ---
-const socialIcons = document.querySelectorAll('.social-icon');
-socialIcons.forEach(icon => {
-    icon.addEventListener('mouseenter', () => {
-        gsap.to(icon, { y: -5, scale: 1.1, duration: 0.2, ease: 'power2.out' });
-    });
-    icon.addEventListener('mouseleave', () => {
-        gsap.to(icon, { y: 0, scale: 1, duration: 0.2, ease: 'power2.in' });
-    });
 });

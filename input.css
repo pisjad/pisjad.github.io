@@ -1,3 +1,158 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styling to inject persona */
+:root {
+    --bg: #0A0A0A;
+    --text: #EAEAEA;
+    --secondary: #B1CECC;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'VT323', monospace;
+    cursor: none; /* Hide default cursor */
+    overflow-x: hidden;
+}
+
+/* Subtle noise/scan lines effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23222' stroke-width='1'%3E%3Cpath d='M-500 750L1500 750'/%3E%3Cpath d='M-500 500L1500 500'/%3E%3Cpath d='M-500 250L1500 250'/%3E%3Cpath d='M-500 0L1500 0'/%3E%3Cpath d='M-500-250L1500-250'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 800px 800px;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: -1;
+    animation: scanlines 10s linear infinite;
+}
+
+@keyframes scanlines {
+    from { background-position: 0 0; }
+    to { background-position: 0 -800px; }
+}
+
+/* General Styles */
+.section-title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+
+/* Hero Section Styles */
+#hero .intro-box {
+    background-color: white;
+    color: black;
+    padding: 0.25rem 1rem;
+    transform: rotate(-8deg) translate(0, 0);
+    position: absolute; /* Changed for easier manipulation */
+    top: -1.5rem;
+    left: -1rem;
+    z-index: 10;
+    font-size: 1.5rem;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#hero .main-name {
+    font-size: clamp(80px, 25vw, 250px);
+    font-weight: bold;
+    line-height: 1;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+}
+
+#hero .main-name:hover {
+    color: var(--secondary);
+}
+
+#hero .hero-subtitles {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: #aaa;
+    letter-spacing: 0.1em;
+}
+
+/* Skills Section */
+.skill-item {
+    border: 2px solid #555;
+    padding: 1rem 2rem;
+    font-size: 1.75rem;
+    transition: all 0.3s ease;
+}
+.skill-item:hover {
+    border-color: var(--secondary);
+    transform: translateY(-5px);
+}
+.sub-skill {
+    font-size: 1rem;
+    color: #888;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Footer Section */
+.social-icon {
+    color: #888;
+    transition: all 0.3s ease;
+}
+.social-icon:hover {
+    color: var(--secondary);
+    transform: scale(1.1) translateY(-3px);
+}
+
+/* Neon glow effect for text and borders */
+.text-secondary { color: var(--secondary); }
+.border-secondary { border-color: var(--secondary); }
+.bg-secondary { background-color: var(--secondary); }
+
+.neon-secondary-text { text-shadow: 0 0 5px var(--secondary), 0 0 10px var(--secondary); }
+.neon-secondary-border { box-shadow: 0 0 3px var(--secondary), 0 0 5px var(--secondary) inset; }
+
+/* Custom Cursor */
+.cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--text);
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease-out, background-color 0.2s, border-color 0.2s;
+}
+.cursor-trail {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text);
+    top: 2px;
+    left: 2px;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.2s ease-out, background-color 0.2s;
+}
+.cursor.hovered {
+    transform: scale(2.5);
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+.cursor-trail.hovered {
+    transform: scale(0);
+}
+
+/* Modal styles */
+.modal {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.modal-content {
+    transition: transform 0.3s ease-in-out;
+}
