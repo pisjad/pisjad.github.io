@@ -1,3 +1,12 @@
+// Validation logs for debug
+console.log('Document ready, checking elements...');
+console.log('Hero element:', document.getElementById('hero'));
+console.log('Pixel rain canvas:', document.getElementById('pixel-rain'));
+console.log('Number of project cards:', document.querySelectorAll('.project-card').length);
+console.log('Modal element:', document.getElementById('project-modal'));
+console.log('Number of body tags:', document.getElementsByTagName('body').length);
+console.log('Total sections:', document.querySelectorAll('section').length);
+
 // --- 1. CUSTOM CURSOR ---
 const cursor = document.querySelector('.cursor');
 const cursorTrail = document.querySelector('.cursor-trail');
@@ -74,10 +83,15 @@ if (canvas) {
 
     function animateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let drawCount = 0;
         particles.forEach(p => {
             p.update();
             p.draw();
+            drawCount++;
         });
+        if (drawCount > 0) {
+            console.log('Canvas: Drew', drawCount, 'particles. Hero z-index:', document.getElementById('hero').style.zIndex, 'Canvas z-index:', canvas.style.zIndex);
+        }
         requestAnimationFrame(animateParticles);
     }
 
@@ -93,12 +107,26 @@ if (canvas) {
 
 
 // --- 3. GSAP ANIMATIONS ---
+console.log('GSAP: Registering ScrollTrigger...');
 gsap.registerPlugin(ScrollTrigger);
+console.log('GSAP: ScrollTrigger registered successfully.');
 
 // Hero text animation
-gsap.from(".main-name", { duration: 1.5, scale: 0.9, opacity: 0, ease: "power3.out", delay: 0.5 });
-gsap.from(".hero-subtitles", { duration: 1.5, y: 30, opacity: 0, ease: "power3.out", delay: 0.8 });
-gsap.from("#intro-box", { duration: 1, y: -30, x: -30, rotation: -15, opacity: 0, ease: "power3.out", delay: 0.3 });
+console.log('GSAP: Animating hero elements...');
+const mainName = document.querySelector(".main-name");
+const heroSubs = document.querySelector(".hero-subtitles");
+
+gsap.from(".main-name", { duration: 1.5, scale: 0.9, opacity: 0, ease: "power3.out", delay: 0.5, onComplete: () => {
+    console.log('GSAP: Main name animation complete. Computed opacity:', window.getComputedStyle(mainName).opacity);
+} });
+gsap.from(".hero-subtitles", { duration: 1.5, y: 30, opacity: 0, ease: "power3.out", delay: 0.8, onComplete: () => {
+    console.log('GSAP: Hero subtitles animation complete. Computed opacity:', window.getComputedStyle(heroSubs).opacity);
+} });
+gsap.from("#intro-box", { duration: 1, y: -30, x: -30, rotation: -15, opacity: 0, ease: "power3.out", delay: 0.3, onComplete: () => {
+    console.log('GSAP: Intro box animation complete. Computed opacity:', window.getComputedStyle(document.getElementById('intro-box')).opacity);
+} });
+
+console.log('GSAP: Hero elements initial styles - Main name opacity:', window.getComputedStyle(mainName).opacity, 'Display:', window.getComputedStyle(mainName).display);
 
 
 // General section fade-in animation
@@ -195,3 +223,8 @@ document.addEventListener('keydown', (e) => {
         closeModal();
     }
 });
+
+// Additional validation log after all init
+console.log('Script loaded, any JS errors above? Check for duplicates or null elements.');
+console.log('Final hero visibility check: Hero section display:', window.getComputedStyle(document.getElementById('hero')).display, 'Opacity:', window.getComputedStyle(document.getElementById('hero')).opacity);
+console.log('Archived section check: Jejak-karsa display:', window.getElementById('jejak-karsa') ? window.getComputedStyle(document.getElementById('jejak-karsa')).display : 'Not found');
