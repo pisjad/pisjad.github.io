@@ -145,42 +145,55 @@ sections.forEach(section => {
     });
 });
 
-// --- 4. PISJAD HOVER ANIMATION ---
+// --- 4. PISJAD HOVER AND AUTO GLITCH ANIMATION ---
 const nameElement = document.querySelector('.main-name');
 const introBox = document.getElementById('intro-box');
 if (nameElement && introBox) {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let interval = null;
+    let glitchInterval = null;
+    let autoGlitchTimer = null;
 
-    nameElement.addEventListener('mouseenter', event => {  
+    function glitchAnimation(target) {
         let iteration = 0;
+        clearInterval(glitchInterval);
         
-        clearInterval(interval);
-        
-        interval = setInterval(() => {
-            event.target.innerText = event.target.innerText
+        glitchInterval = setInterval(() => {
+            target.innerText = target.innerText
             .split("")
             .map((letter, index) => {
                 if(index < iteration) {
-                    return event.target.dataset.value[index];
+                    return target.dataset.value[index];
                 }
                 return letters[Math.floor(Math.random() * 26)]
             })
             .join("");
             
-            if(iteration >= event.target.dataset.value.length){ 
-                clearInterval(interval);
+            if(iteration >= target.dataset.value.length){
+                clearInterval(glitchInterval);
+                // Reset intro box after glitch
+                introBox.style.transform = 'rotate(-8deg) translate(0, 0)';
             }
             
             iteration += 1 / 3;
         }, 30);
 
         introBox.style.transform = 'rotate(-15deg) translate(-60px, -30px)';
+    }
+
+    nameElement.addEventListener('mouseenter', () => {
+        glitchAnimation(nameElement);
     });
 
     nameElement.addEventListener('mouseleave', () => {
         introBox.style.transform = 'rotate(-8deg) translate(0, 0)';
     });
+
+    // Auto glitch every 8 seconds
+    autoGlitchTimer = setInterval(() => {
+        if (!nameElement.matches(':hover')) { // Only if not currently hovered
+            glitchAnimation(nameElement);
+        }
+    }, 8000);
 }
 
 
@@ -194,7 +207,10 @@ projectCards.forEach(card => {
         document.getElementById('modal-title').textContent = card.dataset.title;
         document.getElementById('modal-category').textContent = card.dataset.category;
         document.getElementById('modal-narrative').textContent = card.dataset.narrative;
-        document.getElementById('modal-image').src = card.dataset.gif || card.dataset.image;
+        document.getElementById('modal-image').src = card.dataset.image;
+        const projectLinkBtn = document.getElementById('modal-project-link');
+        projectLinkBtn.href = card.dataset.projectLink || '#';
+        projectLinkBtn.target = '_blank';
         
         gsap.to(modal, { autoAlpha: 1, duration: 0.3 });
         gsap.fromTo(modal.querySelector('.modal-content'), { scale: 0.95 }, { scale: 1, duration: 0.3, ease: 'power3.out' });
@@ -203,12 +219,11 @@ projectCards.forEach(card => {
 });
 
 function closeModal() {
-    modal.classList.add('opacity-0');
-    modal.querySelector('.modal-content').classList.add('scale-95');
-    setTimeout(() => {
+    gsap.to(modal, { autoAlpha: 0, duration: 0.3, onComplete: () => {
         modal.classList.add('invisible');
         document.body.style.overflow = '';
-    }, 300);
+    } });
+    gsap.to(modal.querySelector('.modal-content'), { scale: 0.95, duration: 0.3, ease: 'power3.out' });
 }
 
 closeModalBtn.addEventListener('click', closeModal);
